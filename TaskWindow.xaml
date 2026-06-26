@@ -1,0 +1,253 @@
+﻿using System.Collections.Generic;
+using System.Windows;
+using CyberSecurityBot.Models;
+
+namespace CyberSecurityBot
+{
+    public partial class QuizWindow : Window
+    {
+        private List<QuizQuestion> questions;
+
+
+    private int currentQuestionIndex = 0;
+
+        private int score = 0;
+
+        public QuizWindow()
+        {
+            InitializeComponent();
+
+            LoadQuestions();
+
+            DisplayQuestion();
+        }
+
+        private void LoadQuestions()
+        {
+            questions = new List<QuizQuestion>();
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What is phishing?",
+                Options = new[] { "Email scam", "Firewall", "Antivirus", "Operating System" },
+                CorrectAnswer = "Email scam",
+                Explanation = "Phishing uses fake emails or messages to steal personal information."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "Which password is the strongest?",
+                Options = new[] { "password123", "12345678", "P@ssw0rd!", "T#9kL!2mQ@7x" },
+                CorrectAnswer = "T#9kL!2mQ@7x",
+                Explanation = "Strong passwords are long, unique, and contain a mix of characters."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What does 2FA stand for?",
+                Options = new[] { "Two-Factor Authentication", "Two File Access", "Second Firewall Access", "Two Form Approval" },
+                CorrectAnswer = "Two-Factor Authentication",
+                Explanation = "2FA adds an extra layer of security beyond a password."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "True or False: You should use the same password for multiple accounts.",
+                Options = new[] { "True", "False" },
+                CorrectAnswer = "False",
+                Explanation = "Using the same password increases the risk if one account is compromised."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What should you do if you receive a suspicious email?",
+                Options = new[] { "Reply to it", "Open all attachments", "Report it as phishing", "Forward it to friends" },
+                CorrectAnswer = "Report it as phishing",
+                Explanation = "Reporting suspicious emails helps prevent cyber attacks."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What is malware?",
+                Options = new[] { "Security software", "Malicious software", "A web browser", "An operating system" },
+                CorrectAnswer = "Malicious software",
+                Explanation = "Malware is software designed to damage or gain unauthorized access to systems."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "Which of the following is safest when using public Wi-Fi?",
+                Options = new[] { "Online banking", "Using a VPN", "Sharing passwords", "Ignoring security warnings" },
+                CorrectAnswer = "Using a VPN",
+                Explanation = "A VPN encrypts your connection and protects your data."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "True or False: Software updates can improve security.",
+                Options = new[] { "True", "False" },
+                CorrectAnswer = "True",
+                Explanation = "Updates often fix security vulnerabilities."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What is social engineering?",
+                Options = new[] { "Building websites", "Manipulating people to reveal information", "Programming software", "Managing networks" },
+                CorrectAnswer = "Manipulating people to reveal information",
+                Explanation = "Social engineering tricks people into giving away sensitive information."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "Which is an example of personal information?",
+                Options = new[] { "Your favourite movie", "Your password", "Today's weather", "A public news article" },
+                CorrectAnswer = "Your password",
+                Explanation = "Passwords should never be shared with others."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What is ransomware?",
+                Options = new[] { "A backup system", "A type of malware that locks files", "A firewall", "An antivirus tool" },
+                CorrectAnswer = "A type of malware that locks files",
+                Explanation = "Ransomware encrypts files and demands payment for access."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "True or False: Clicking unknown links can be dangerous.",
+                Options = new[] { "True", "False" },
+                CorrectAnswer = "True",
+                Explanation = "Unknown links can lead to phishing sites or malware downloads."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What should you do before entering personal information on a website?",
+                Options = new[] { "Check for HTTPS", "Ignore the URL", "Disable antivirus", "Share your password" },
+                CorrectAnswer = "Check for HTTPS",
+                Explanation = "HTTPS helps secure communication between your browser and the website."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "What is identity theft?",
+                Options = new[] { "Stealing hardware", "Using someone's personal information fraudulently", "Deleting files", "Installing software" },
+                CorrectAnswer = "Using someone's personal information fraudulently",
+                Explanation = "Identity theft occurs when someone uses another person's information without permission."
+            });
+
+            questions.Add(new QuizQuestion
+            {
+                Question = "Which action helps protect your accounts?",
+                Options = new[] { "Sharing passwords", "Using weak passwords", "Enabling two-factor authentication", "Ignoring security alerts" },
+                CorrectAnswer = "Enabling two-factor authentication",
+                Explanation = "2FA adds an extra security layer and reduces the risk of unauthorized access."
+            });
+        }
+
+        private void DisplayQuestion()
+        {
+            if (currentQuestionIndex >= questions.Count)
+            {
+                ShowFinalResults();
+                return;
+            }
+
+            QuizQuestion question =
+                questions[currentQuestionIndex];
+
+            txtQuestion.Text =
+                question.Question;
+
+            lstAnswers.Items.Clear();
+
+            foreach (string option in question.Options)
+            {
+                lstAnswers.Items.Add(option);
+            }
+
+            txtScore.Text =
+                $"Score: {score}/{questions.Count}";
+        }
+
+        private void btnSubmit_Click(
+            object sender,
+            RoutedEventArgs e)
+        {
+            if (lstAnswers.SelectedItem == null)
+            {
+                MessageBox.Show(
+                    "Please select an answer first.");
+                return;
+            }
+
+            string selectedAnswer =
+                lstAnswers.SelectedItem.ToString();
+
+            QuizQuestion currentQuestion =
+                questions[currentQuestionIndex];
+
+            if (selectedAnswer ==
+                currentQuestion.CorrectAnswer)
+            {
+                score++;
+
+                MessageBox.Show(
+                    "Correct!\n\n" +
+                    currentQuestion.Explanation,
+                    "Feedback");
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Incorrect!\n\nCorrect Answer: " +
+                    currentQuestion.CorrectAnswer +
+                    "\n\n" +
+                    currentQuestion.Explanation,
+                    "Feedback");
+            }
+
+            currentQuestionIndex++;
+
+            DisplayQuestion();
+        }
+
+        private void ShowFinalResults()
+        {
+            string result;
+
+            if (score >= 13)
+            {
+                result =
+                    "Excellent! You're a Cybersecurity Pro!";
+            }
+            else if (score >= 10)
+            {
+                result =
+                    "Great job! You have strong cybersecurity knowledge.";
+            }
+            else if (score >= 7)
+            {
+                result =
+                    "Good effort! Keep learning to stay safe online.";
+            }
+            else
+            {
+                result =
+                    "Keep studying cybersecurity concepts and try again.";
+            }
+
+            MessageBox.Show(
+                $"Quiz Complete!\n\n" +
+                $"Final Score: {score}/{questions.Count}\n\n" +
+                result,
+                "Quiz Results");
+
+            Close();
+        }
+    }
+
+
+}

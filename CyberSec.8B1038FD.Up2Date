@@ -1,0 +1,9 @@
+﻿namespace CyberSecurityBot.Models
+{
+    public class UserMemory
+    {
+        public string FavouriteTopic { get; set; }
+
+        public string LastTopic { get; set; }
+    }
+}
