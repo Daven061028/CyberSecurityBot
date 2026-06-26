@@ -1,7 +1,0 @@
-C:\Users\Student\source\repos\CyberSChatbot\CyberSChatbot\bin\Debug\CyberSChatbot.exe.config
-C:\Users\Student\source\repos\CyberSChatbot\CyberSChatbot\bin\Debug\CyberSChatbot.exe
-C:\Users\Student\source\repos\CyberSChatbot\CyberSChatbot\bin\Debug\CyberSChatbot.pdb
-C:\Users\Student\source\repos\CyberSChatbot\CyberSChatbot\obj\Debug\CyberSChatbot.csproj.AssemblyReference.cache
-C:\Users\Student\source\repos\CyberSChatbot\CyberSChatbot\obj\Debug\CyberSChatbot.csproj.CoreCompileInputs.cache
-C:\Users\Student\source\repos\CyberSChatbot\CyberSChatbot\obj\Debug\CyberSChatbot.exe
-C:\Users\Student\source\repos\CyberSChatbot\CyberSChatbot\obj\Debug\CyberSChatbot.pdb
